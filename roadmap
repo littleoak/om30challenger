@@ -12,3 +12,10 @@ step1 e step2 em :
 littleoak@littleoakmobile:/var/www/om30$ date
 qui 30 mar 2023 23:41:26 -03
 
+setp3
+adicionando as migrations de Pacientes_Tabela + EnderecosPacientes
+sex 31 mar 2023 09:58:21 -03
++    INFO  Model [app/Models/Pacientes.php] created successfully.  
++    INFO  Model [app/Models/Enderecos.php] created successfully.  
+sex 31 mar 2023 10:02:21 -03
+
