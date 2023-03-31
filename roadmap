@@ -1,0 +1,14 @@
+step 1:
+Setup completo no ubuntu desktop (single boot em um macbook) 
+Lamp2 + Postgres -> Iniciado o desafio hoje a noite [fui notificado sobre próximo ao fim da manhã do dia 30/03/2023]
+
+step 2:
+add repositório git puro e ainda sem estratégia de branch.
+as controladoras serão criadas em app/Http/Controllers/Api/AlgumacoisaController
+A controller atual é PacientesController dentro de Api... não sei se terei tempo no desafio,
+vou dar tudo que tenho, se houver tempo vou deixar um Repository de dados e etc. Go ahead <3.
+
+step1 e step2 em : 
+littleoak@littleoakmobile:/var/www/om30$ date
+qui 30 mar 2023 23:41:26 -03
+
