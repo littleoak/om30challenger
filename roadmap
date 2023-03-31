@@ -19,3 +19,7 @@ sex 31 mar 2023 09:58:21 -03
 +    INFO  Model [app/Models/Enderecos.php] created successfully.  
 sex 31 mar 2023 10:02:21 -03
 
+step4
+Nas migrations eu coloquei o número da casa aonde o paciente mora pensando que ele nunca vai passar por qualquer
+fator matemático, deixei em string e com tamanho aceitável pra deixarem S/ Número ou SEM NÚMERO, ok? <3
+
