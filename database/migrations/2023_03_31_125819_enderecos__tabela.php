@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string('numero', 20); //pode ter SEM NÚMERO, e números que não são calculados precisam ser STRING
             $table->string('complemento', 177);
             $table->string('bairro', 177);
-            $table->string('cidade', 177);
-            $table->string('estado', 177);
+            $table->string('cep', 9); //30664-792
+            $table->string('cidade', 37);
+            //São José do Vale do Rio Preto <--- maior nome de cidade do Brasil tem 29
+            //deixei 37 pensando em loucuras de novas cidades kkkk
+            $table->string('estado', 19); //Rio Grande do Norte o maior
             $table->timestamps();
         });
     }

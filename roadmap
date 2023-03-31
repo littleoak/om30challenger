@@ -1,5 +1,5 @@
 step 1:
-Setup completo no ubuntu desktop (single boot em um macbook) 
+Setup completo no ubuntu desktop (single boot em um macbook)
 Lamp2 + Postgres -> Iniciado o desafio hoje a noite [fui notificado sobre próximo ao fim da manhã do dia 30/03/2023]
 
 step 2:
@@ -8,18 +8,71 @@ as controladoras serão criadas em app/Http/Controllers/Api/AlgumacoisaControlle
 A controller atual é PacientesController dentro de Api... não sei se terei tempo no desafio,
 vou dar tudo que tenho, se houver tempo vou deixar um Repository de dados e etc. Go ahead <3.
 
-step1 e step2 em : 
+step1 e step2 em :
 littleoak@littleoakmobile:/var/www/om30$ date
 qui 30 mar 2023 23:41:26 -03
 
 setp3
 adicionando as migrations de Pacientes_Tabela + EnderecosPacientes
 sex 31 mar 2023 09:58:21 -03
-+    INFO  Model [app/Models/Pacientes.php] created successfully.  
-+    INFO  Model [app/Models/Enderecos.php] created successfully.  
++    INFO  Model [app/Models/Pacientes.php] created successfully.
++    INFO  Model [app/Models/Enderecos.php] created successfully.
 sex 31 mar 2023 10:02:21 -03
 
 step4
 Nas migrations eu coloquei o número da casa aonde o paciente mora pensando que ele nunca vai passar por qualquer
 fator matemático, deixei em string e com tamanho aceitável pra deixarem S/ Número ou SEM NÚMERO, ok? <3
 
+step5
+om30=# \dt
+                List of relations
+ Schema |          Name          | Type  | Owner
+--------+------------------------+-------+-------
+ public | enderecos              | table | om30
+ public | failed_jobs            | table | om30
+ public | migrations             | table | om30
+ public | pacientes              | table | om30
+ public | password_reset_tokens  | table | om30
+ public | personal_access_tokens | table | om30
+ public | users                  | table | om30
+(7 rows)
+
+om30=# \d pacientes;
+                                            Table "public.pacientes"
+     Column      |              Type              | Collation | Nullable |                Default
+-----------------+--------------------------------+-----------+----------+---------------------------------------
+ id              | bigint                         |           | not null | nextval('pacientes_id_seq'::regclass)
+ nome            | character varying(177)         |           | not null |
+ nome_mae        | character varying(177)         |           | not null |
+ data_nascimento | date                           |           | not null |
+ cpf             | character varying(14)          |           | not null |
+ cns             | character varying(15)          |           | not null |
+ foto            | character varying(255)         |           |          |
+ created_at      | timestamp(0) without time zone |           |          |
+ updated_at      | timestamp(0) without time zone |           |          |
+Indexes:
+    "pacientes_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "enderecos" CONSTRAINT "enderecos_pacientes_id_foreign" FOREIGN KEY (pacientes_id) REFERENCES pacientes(id) ON DELETE CASCADE
+
+om30=# \d enderecos;
+                                           Table "public.enderecos"
+    Column    |              Type              | Collation | Nullable |                Default
+--------------+--------------------------------+-----------+----------+---------------------------------------
+ id           | bigint                         |           | not null | nextval('enderecos_id_seq'::regclass)
+ pacientes_id | bigint                         |           | not null |
+ endereco     | character varying(177)         |           | not null |
+ numero       | character varying(20)          |           | not null |
+ complemento  | character varying(177)         |           | not null |
+ bairro       | character varying(177)         |           | not null |
+ cep          | character varying(9)           |           | not null |
+ cidade       | character varying(37)          |           | not null |
+ estado       | character varying(19)          |           | not null |
+ created_at   | timestamp(0) without time zone |           |          |
+ updated_at   | timestamp(0) without time zone |           |          |
+Indexes:
+    "enderecos_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "enderecos_pacientes_id_foreign" FOREIGN KEY (pacientes_id) REFERENCES pacientes(id) ON DELETE CASCADE
+
+sex 31 mar 2023 11:10:36 -03
