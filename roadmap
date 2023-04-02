@@ -76,3 +76,5 @@ Foreign-key constraints:
     "enderecos_pacientes_id_foreign" FOREIGN KEY (pacientes_id) REFERENCES pacientes(id) ON DELETE CASCADE
 
 sex 31 mar 2023 11:10:36 -03
+
+Hoje o foco é criar força nas models e tentar algum crud em restfull

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Enderecos extends Model
 {
     use HasFactory;
+
+    public function pacientes(): BelongsTo
+    {
+        return $this->belongsTo(Pacientes::class);
+    }
 }
