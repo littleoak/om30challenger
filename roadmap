@@ -77,4 +77,47 @@ Foreign-key constraints:
 
 sex 31 mar 2023 11:10:36 -03
 
+step5
 Hoje o foco é criar força nas models e tentar algum crud em restfull
+Coloquei o Breeze pra não perder tempo criando o /login
+
+Body (JSON) para auth
+{
+    "email" : "om30@om30.com",
+    "password" : "./c0rr3ct"
+}
+return "1|pwjaBJZzJzYxRp2SScvXrPZ8BggLDroKt59DyaeM"
+
+caso queiram brincar com php puro para testes:
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://localhost/api/login',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "email" : "om30@om30.com",
+    "password" : "./c0rr3ct"
+}',
+  CURLOPT_HTTPHEADER => array(
+    'Accept: application/json',
+    'Authorization: Bearer 1|3ps44766h7CYPeVVxRXu3JUxYLjYsTrnRLkbsYzT',
+    'Content-Type: application/json',
+    'Cookie: laravel_session=eyJpdiI6IlFDVS9aTi9leldiN21WMDl0RXg2RUE9PSIsInZhbHVlIjoiUkx1R1ZrT0dHZTZ1dkVNbnhPZkp6MVY2elhQOW5OUm1iYUZyM0U0K2p5cWJBcVFpdWdRMTFMdXpqY291RlBUb0NmbG9FR3hTZ05LZGtTMm1Ca2xSWDdkc3VFRDBaQzBoOXg3bk9FNmZZZldJcE92Y2szbU8rWWprejR2NmI5K00iLCJtYWMiOiI4ZmFjMTQ2M2QzZDVkZmE0MmFjNzZhYzc3MjdmZjRiMzllZmY0OGU5NmMyODcwOWE3MGUzZmZmZTNhM2VkZDg4IiwidGFnIjoiIn0%3D'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
+littleoak@littleoakmobile:/var/www/om30$ date
+dom 02 abr 2023 01:59:10 -03
+
