@@ -11,7 +11,7 @@ class PacientesTableSeeder extends Seeder
 {
     public function run()
     {
-        Pacientes::factory()->count(50)->create()->each(function ($paciente) {
+        Pacientes::factory()->count(77)->create()->each(function ($paciente) {
             $endereco = Enderecos::factory()->make();
             $paciente->enderecos()->save($endereco);
         });
