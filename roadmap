@@ -120,4 +120,4 @@ echo $response;
 
 littleoak@littleoakmobile:/var/www/om30$ date
 dom 02 abr 2023 01:59:10 -03
-
+Detalhe do step acima, mesmo sendo GET ele está bloqueando sem o token BEARER :)
