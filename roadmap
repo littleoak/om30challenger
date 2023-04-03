@@ -181,3 +181,8 @@ drwxr-sr-x 2 www-data  littleoak 4,0K abr  3 10:20 .
 mudei a abordagem de upload, algo beeem minúsculo, está 100% testado e funcionando
 campos de image (com imagem) + paciente (id) são enviados no CORPO do curl conforme acima
 
+
+step9
+Validador de CNS funcionando :)
+seg 03 abr 2023 11:47:22 -03
+

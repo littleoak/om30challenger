@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Pacientes;
 use Illuminate\Http\Request;
+use App\Traits\CnsTraitOld;
+
 
 class PacientesController extends Controller
 {
+    use CnsTraitOld;
+
     #mostrar pacientes overall, quando está listando sem critérios - bom paginar já
     public function index(Request $request)
     {
@@ -16,7 +20,6 @@ class PacientesController extends Controller
         $query = Pacientes::query();
 
         if($request->has('page')) $page = $request->page;
-
         if($request->has('nome')) {
              $count = $query->where('nome', 'LIKE', '%'.$request->nome.'%')->count();
              if($count > 0) {
@@ -59,9 +62,12 @@ class PacientesController extends Controller
     }
 
     #insert do paciente
-    public function store()
+    public function store(Request $request)
     {
-
+        $cns = "237 2443 5445 0003"; //nice
+        //$cns = "732 0155 4019 0001"; //nice
+        //$cns = "732 1155 4419 9999"; //troll
+        dd($this->validadorDeCns($cns));
     }
 
     #atualizando um dado do paciente

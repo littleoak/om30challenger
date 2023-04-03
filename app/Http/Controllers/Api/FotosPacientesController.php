@@ -25,7 +25,7 @@ class FotosPacientesController extends Controller
 
         if($uploadPath) {
             $pacientes->foto = $uploadPath;
-            $pacientes->save(); 
+            $pacientes->save();
             return response()->json($uploadPath, 200);
         }
 
