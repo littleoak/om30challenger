@@ -70,18 +70,18 @@ class PacientesController extends Controller
 
     }
 
-    #removendo um paciente
+    #removendo um paciente por ID
     public function destroy(int $pacientes)
     {
         $del = 0;
-        
+
         if(filter_var($pacientes, FILTER_VALIDATE_INT) !== false) $del = Pacientes::destroy($pacientes);
         if($del) {
             return response()->json('Paciente Removido Com Sucesso', 200);
         }
 
         return response()->json('Erro ou Inexistência', 404);
-
     }
+
 
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\FotosPacientesController;
+use App\Http\Controllers\Api\PacientesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource(
         '/pacientes',
-        \App\Http\Controllers\Api\PacientesController::class);
+        PacientesController::class);
+    Route::post('/fotoupload', [FotosPacientesController::class, 'upload']);
+
+
 });
 
 Route::post('/login', function (Request $request) {
