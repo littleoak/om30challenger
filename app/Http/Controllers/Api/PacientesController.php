@@ -67,7 +67,9 @@ class PacientesController extends Controller
         $cns = "237 2443 5445 0003"; //nice
         //$cns = "732 0155 4019 0001"; //nice
         //$cns = "732 1155 4419 9999"; //troll
-        dd($this->validadorDeCns($cns));
+        if($this->validadorDeCns($cns)) {
+            
+        }
     }
 
     #atualizando um dado do paciente

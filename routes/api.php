@@ -20,14 +20,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->group(function() {
-    Route::apiResource(
-        '/pacientes',
-        PacientesController::class);
-    Route::post('/fotoupload', [FotosPacientesController::class, 'upload']);
+Route::apiResource(
+    '/pacientes',
+    PacientesController::class);
+Route::post('/fotoupload', [FotosPacientesController::class, 'upload']);
 
-
-});
+//Route::middleware('auth:sanctum')->group(function() {
+//
+//
+//});
 
 Route::post('/login', function (Request $request) {
     $credentials = $request->only(['email', 'password']);
