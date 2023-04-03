@@ -5,15 +5,11 @@ namespace App\Traits;
 trait CnsTrait
 {
 
-    function validadorDeCns($numeroCartao)
+    function validadorDeCns($cns)
     {
-        $numeroCartao = preg_replace('/[^0-9]/', '', (string) $numeroCartao);
 
-        // Etapa 1: Validar tamanho do número do cartão
-            if (strlen($numeroCartao) !== 15) {
-                echo 'erro em 15';
-                return false;
-            }
+        $cns = preg_replace('/[^0-9]/', '', (string) $cns);
+        if (strlen($cns) != 15) return false;
 
         $invalidos = [
             '000000000000000',
@@ -28,28 +24,67 @@ trait CnsTrait
             '999999999999999'
         ];
 
-        if (in_array($numeroCartao, $invalidos)) {
-            echo 'erro repetidos';
+        if (in_array($cns, $invalidos)) {
             return false;
         }
 
-            // Etapa 2: Calcular dígito verificador
-            $soma = 0;
-            for ($i = 0; $i < 14; $i++) {
-                $digito = intval($numeroCartao[$i]);
-                if ($i % 2 === 0) {
-                    $soma += $digito;
-                } else {
-                    $digitoX2 = $digito * 2;
-                    $soma += ($digitoX2 >= 10 ? ($digitoX2 - 9) : $digitoX2);
-                }
-            }
+        // check sum pis
+        $acao = substr($cns, 0, 1);
 
-            $digitoVerificadorCalculado = ceil($soma / 10) * 10;
+        switch ($acao):
+            case '1':
+            case '2':
+                $ret = $this->validaCns($cns);
+                break;
+            case '7':
+            case '8':
+            case '9':
+                $ret = $this->validaCnsProvisorio($cns);
+                break;
+            default:
+                $ret = false;
+        endswitch;
 
-            // Etapa 3: Validar dígito verificador
-            $digitoVerificador = intval($numeroCartao[14]);
-            echo $digitoVerificador.'< dv | calc > '.$digitoVerificadorCalculado.PHP_EOL;
-            return ($digitoVerificador === $digitoVerificadorCalculado);
+        return $ret;
+    }
+
+    function validaCns($cns)
+    {
+        // check sum pis
+        $pis = substr($cns, 0, 11);
+        $soma = 0;
+
+        for ($i = 0, $j = strlen($pis), $k = 15; $i < $j; $i++, $k--) {
+            $soma += $pis[$i] * $k;
+        }
+
+        $dv = 11 - fmod($soma, 11);
+        $dv = ($dv != 11) ? $dv : '0'; // '0' se for igual a 11
+
+        if ($dv == 10) {
+            $soma += 2;
+            $dv = 11 - fmod($soma, 11);
+            $resultado = $pis . '001' . $dv;
+        } else {
+            $resultado = $pis . '000' . $dv;
+        }
+
+        if ($cns != $resultado) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function validaCnsProvisorio($cns)
+    {
+
+        $soma = 0;
+
+        for ($i = 0, $j = strlen($cns), $k = $j; $i < $j; $i++, $k--) {
+            $soma += (int)$cns[$i] * $k;
+        }
+
+        return $soma % 11 == 0 && $j == 15;
     }
 }

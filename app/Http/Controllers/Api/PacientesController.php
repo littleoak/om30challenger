@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Pacientes;
 use Illuminate\Http\Request;
-use App\Traits\CnsTraitOld;
+use App\Traits\CnsTrait;
 
 
 class PacientesController extends Controller
 {
-    use CnsTraitOld;
+    use CnsTrait;
 
     #mostrar pacientes overall, quando está listando sem critérios - bom paginar já
     public function index(Request $request)
