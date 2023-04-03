@@ -15,16 +15,17 @@ class FotosPacientesController extends Controller
         $news = 'Algum erro ocorreu no upload da imagem';
         $apiCode = 400;
         $pacienteId = $request->has('paciente');
-        $user = Pacientes::find($pacienteId);
-        
-        if($user == null) return response()->json($news, $apiCode);
+        $pacientes = Pacientes::find($pacienteId);
+
+        if($pacientes == null) return response()->json($news, $apiCode);
 
         $uploadPath = $request->hasFile('imagem')
             ? $request->file('imagem')->store('pacientes_fotos', 'public')
             : null;
 
         if($uploadPath) {
-            $user->update(['foto' => $uploadPath]);
+            $pacientes->foto = $uploadPath;
+            $pacientes->save(); 
             return response()->json($uploadPath, 200);
         }
 

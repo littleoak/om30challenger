@@ -178,4 +178,6 @@ littleoak@littleoakmobile:/var/www/om30/storage/app/public$ ls -lath pacientes_f
 total 416K
 drwxr-sr-x 2 www-data  littleoak 4,0K abr  3 10:20 .
 -rw-r--r-- 1 www-data  littleoak 135K abr  3 10:20 1ZfYZL1vTE2WT1o8gR7rCB9RZQDpUcIMGoqCQeeJ.png
+mudei a abordagem de upload, algo beeem minúsculo, está 100% testado e funcionando
+campos de image (com imagem) + paciente (id) são enviados no CORPO do curl conforme acima
 
