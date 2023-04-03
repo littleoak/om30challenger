@@ -11,7 +11,7 @@ class PacientesController extends Controller
     public function index(Request $request)
     {
         $news = 'Bem Vindo a API OMG30 - Restful Ready';
-        $apiCode = 404;
+        $apiCode = 400;
         $page = null;
         $query = Pacientes::query();
 
@@ -61,7 +61,7 @@ class PacientesController extends Controller
     #insert do paciente
     public function store()
     {
-        
+
     }
 
     #atualizando um dado do paciente
@@ -71,8 +71,16 @@ class PacientesController extends Controller
     }
 
     #removendo um paciente
-    public function destroy()
+    public function destroy(int $pacientes)
     {
+        $del = 0;
+        
+        if(filter_var($pacientes, FILTER_VALIDATE_INT) !== false) $del = Pacientes::destroy($pacientes);
+        if($del) {
+            return response()->json('Paciente Removido Com Sucesso', 200);
+        }
+
+        return response()->json('Erro ou Inexistência', 404);
 
     }
 
