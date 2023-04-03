@@ -124,3 +124,14 @@ Detalhe do step acima, mesmo sendo GET ele está bloqueando sem o token BEARER :
 
 step6
 Factory, faker e seeder => ok, trabalhando nos resources (endpoints)
+date
+dom 02 abr 2023 14:01:11 -03
+
+step7
+add paginação simples com link simples gerado com base em hatoas
+http://localhost/api/pacientes?page=1&nome=Sra
+Se andar em 
+http://localhost/api/pacientes?page=2&nome=Sra
+Roda, dinamicamente só está a representação, pois não há tempo para implementar e preciso deixar a api funcionando
+seg 03 abr 2023 00:26:40 -03
+

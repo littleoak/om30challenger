@@ -9,35 +9,36 @@ use Illuminate\Database\Eloquent\Model;
 class Pacientes extends Model
 {
     use HasFactory;
+
     protected $appends = ['link'];
     protected $with = ['enderecos'];
+    protected $fillable = ['nome', 'cpf'];
+
 
     public function enderecos()
     {
         return $this->hasOne(Enderecos::class);
     }
 
-    public function link(): Attribute //com appends a gente disse que LINK que não é uma coluna na tabela
-        //deve ser chamado, no topo na var appends
+    public function link(): Attribute
     {
         return new Attribute(
             get: fn() => [[
                 'rel' => 'self',
                 'url' => "/api/pacientes/{$this->id}"
-            ],
+                ],
                 [
                     'rel' => 'enderecos',
                     'url' => "/api/pacientes/{$this->id}/enderecos"
                 ],
             ]);
     }
-
+}
+    /*
     protected static function booted()
     {
         self::addGlobalScope('ordered', function(Builder $queryBuilder) {
             $queryBuilder->orderBy('nome', 'asc');
         });
-    }
+    } */
 
-
-}
