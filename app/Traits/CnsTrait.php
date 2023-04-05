@@ -5,10 +5,15 @@ namespace App\Traits;
 trait CnsTrait
 {
 
+    function limparNumerosCns($string) {
+        $string = preg_replace('/[^0-9]/', '', (string)$string);
+        return $string;
+    }
+
     function validadorDeCns($cns)
     {
 
-        $cns = preg_replace('/[^0-9]/', '', (string) $cns);
+        $cns = $this->limparNumerosCns($cns);
         if (strlen($cns) != 15) return false;
 
         $invalidos = [

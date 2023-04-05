@@ -12,8 +12,7 @@ class Pacientes extends Model
 
     protected $appends = ['link'];
     protected $with = ['enderecos'];
-    protected $fillable = ['nome', 'cpf'];
-
+    protected $fillable = ['nome', 'nome_mae', 'data_nascimento', 'cpf', 'cns'];
 
     public function enderecos()
     {

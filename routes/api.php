@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CsvImportadorController;
 use App\Http\Controllers\Api\FotosPacientesController;
 use App\Http\Controllers\Api\PacientesController;
 use Illuminate\Http\Request;
@@ -24,6 +25,7 @@ Route::apiResource(
     '/pacientes',
     PacientesController::class);
 Route::post('/fotoupload', [FotosPacientesController::class, 'upload']);
+Route::post('import-csv', [CsvImportadorController::class, 'importCsv']);
 
 //Route::middleware('auth:sanctum')->group(function() {
 //

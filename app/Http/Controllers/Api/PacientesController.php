@@ -64,12 +64,25 @@ class PacientesController extends Controller
     #insert do paciente
     public function store(Request $request)
     {
-        $cns = "237 2443 5445 0003"; //nice
+        //$cns = "237 2443 5445 0003"; //nice
         //$cns = "732 0155 4019 0001"; //nice
         //$cns = "732 1155 4419 9999"; //troll
-        if($this->validadorDeCns($cns)) {
-            
-        }
+        $news = null;
+        $cns = $this->limparNumerosCns($request->cns);
+        #DEADLINE :( - ENCERRAR DADOS ERRADOS DE FORMA SIMBÓLICA - > Poderia haver uma validação mais gostosa :(, deadline
+        if(!$request->has('cns')) $news = 'Erro de CNS Vazio. ';
+        if(!$request->has('nome')) $news .= 'Erro de NOME Vazio. ';
+        if(!$request->has('nome_mae')) $news .= 'Erro de NOME DA MÃE Vazio. ';
+        if(!$request->has('cpf')) $news .= 'Erro de CPF Vazio. ';
+        if(!$request->has('data_nascimento')) $news .= 'Erro de DATA DE NASCIMENTO Vazia. ';
+        if(!$this->validadorDeCns($cns)) $news .= 'Erro de CNS ERRADO/INVÁLIDO. ';
+        if(!empty($news)) return response()->json($news, 404);
+
+        $data = request()->only(['nome', 'nome_mae', 'data_nascimento', 'cpf', 'cns']);
+        if(Pacientes::create($data)) return response()->json('Dados Perfeitos! Atente para o Resource com EndPoint /api/fotoupload INFORMANDO paciente como ID em POST', 200);
+
+        return response()->json('Erro na Inserção de Dados'.$news, 404);
+
     }
 
     #atualizando um dado do paciente
