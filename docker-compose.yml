@@ -1,40 +1,45 @@
-version: '3'
-
+version: "3.7"
 services:
-    app:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        container_name: app
-        volumes:
-            - .:/var/www/html
-        depends_on:
-            - db
-        environment:
-            - DB_HOST=db
-            - DB_PORT=5432
-            - DB_DATABASE=${DB_DATABASE}
-            - DB_USERNAME=${DB_USERNAME}
-            - DB_PASSWORD=${DB_PASSWORD}
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: om30app
+    container_name: containerom30-app
+    restart: unless-stopped
+    working_dir: /app
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "8088:8000"
+    depends_on:
+      - db
+    networks:
+      - challangeom30net
 
-    db:
-        image: postgres:latest
-        container_name: db
-        environment:
-            - POSTGRES_DB=${DB_DATABASE}
-            - POSTGRES_USER=${DB_USERNAME}
-            - POSTGRES_PASSWORD=${DB_PASSWORD}
-        volumes:
-            - ./data:/var/lib/postgresql/data
+  db:
+    image: postgres:14.7
+    container_name: contanerom30-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE}
+      PGDATA: /var/lib/postgresql/data/littleoak
+      SERVICE_TAGS: dev
+      SERVICE_NAME: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/postgres:/docker-entrypoint-initdb.d
+    networks:
+      - challangeom30net
 
-    web:
-        image: nginx:latest
-        container_name: web
-        ports:
-            - "8080:80"
-        volumes:
-            - ./nginx.conf:/etc/nginx/nginx.conf
-            - .:/var/www/html
-        depends_on:
-            - app
-
+networks:
+  challangeom30net:
+    driver: bridge
